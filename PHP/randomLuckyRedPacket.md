@@ -1,3 +1,4 @@
+```php
 <?php
 /**
  * 拼手气红包
@@ -46,3 +47,4 @@ $ret = randBonus($totalBonus, $bonusSize);
 $total = array_sum($ret);
 echo '红包总金额：'.$total.' 分,'.'红包总份数：'.$bonusSize.' 份'.PHP_EOL;
 echo '拼手气红包领取明细：'.implode(',', $ret).PHP_EOL;
+```
