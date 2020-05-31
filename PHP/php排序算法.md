@@ -14,7 +14,7 @@
 
 **算法总结**
 
-![](./images/sort-algorithm-1.jpg)
+![](../images/algorithms/sort-algorithm-1.jpg)
 
 **图片名词解释：**
 
@@ -28,11 +28,11 @@
 - **比较类排序**：通过比较来决定元素间的相对次序，由于其时间复杂度不能突破O(nlogn)，因此也称为非线性时间比较类排序。
 - **非比较类排序**：不通过比较来决定元素间的相对次序，它可以突破基于比较排序的时间下界，以线性时间运行，因此也称为线性时间非比较类排序。 
 
-![](./images/sort-algorithm-2.png)
+![](../images/algorithms/sort-algorithm-2.png)
 
 算法复杂度
 
-![](./images/sort-algorithm-3.png)
+![](../images/algorithms/sort-algorithm-3.png)
 
 **相关概念**
 
@@ -71,7 +71,7 @@
 
 **1.2 动图演示**
 
-![](./images/bubble-sort.gif)
+![](../images/algorithms/bubble-sort.gif)
 
 #### 1.3 代码实现
 
@@ -106,7 +106,7 @@ n个记录的直接选择排序可经过n-1趟直接选择排序得到有序结�
 
 #### **2.2 动图演示**
 
-![](./images/selection-sort.gif)
+![](../images/algorithms/selection-sort.gif)
 
 #### 2.3 代码实现
 
@@ -153,7 +153,7 @@ function selectionSort(arr) {
 
 #### 3.2 动图演示
 
-![](./images/insertion-sort.gif)
+![](../images/algorithms/insertion-sort.gif)
 
 #### 3.2 代码实现
 
@@ -195,9 +195,9 @@ function insertionSort(arr) {
 
 #### 4.2 动图演示
 
-![](./images/shell-sort.gif)
+![](../images/algorithms/shell-sort.gif)
 
-![](./images/shell-sort-1.jpg)
+![](../images/algorithms/shell-sort-1.jpg)
 
 #### 4.3 代码实现
 
@@ -240,7 +240,7 @@ function shellSort(arr) {
 
 #### 5.2 动图演示
 
-![](./images/merge-sort.gif)
+![](../images/algorithms/merge-sort.gif)
 
 #### 5.3 代码实现
 
@@ -298,7 +298,7 @@ function merge(left, right) {
 
 #### 6.2 动图演示
 
-![](./images/quick-sort.gif)
+![](../images/algorithms/quick-sort.gif)
 
 #### 6.3 代码实现
 
@@ -352,7 +352,7 @@ function swap(arr, i, j) {
 
 #### 7.2 动图演示
 
-![](./images/heap-sort.gif)
+![](../images/algorithms/heap-sort.gif)
 
 #### 7.3 代码实现
 
@@ -419,7 +419,7 @@ function heapSort(arr) {
 
 #### 8.2 动图演示
 
-![](./images/counting-sort.gif)
+![](../images/algorithms/counting-sort.gif)
 
 #### 8.3 代码实现
 
@@ -468,7 +468,7 @@ function countingSort(arr, maxValue) {
 
 #### 9.2 图片演示
 
-![](./images/bucket-sort.png)
+![](../images/algorithms/bucket-sort.png)
 
 #### 9.3 代码实现
 
@@ -534,7 +534,7 @@ function bucketSort(arr, bucketSize) {
 
 #### 10.2 动图演示
 
-![](./images/radix-sort.gif)
+![](../images/algorithms/radix-sort.gif)
 
 #### 10.3 代码实现
 

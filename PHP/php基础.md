@@ -674,3 +674,200 @@ array_filter 函数把输入数组中的每个键值传给回调函数。如果�
 - [S.O.L.I.D 面向对象设计](https://laravel-china.org/articles/4160/solid-object-oriented-design-and-programming-oodoop-notes?order_by=created_at&)
 - [浅谈IOC--说清楚IOC是什么](http://www.cnblogs.com/DebugLZQ/archive/2013/06/05/3107957.html)
 - [Redis和Memcached的区别](https://www.biaodianfu.com/redis-vs-memcached.html)
+
+```
+<?php
+//获取客户端真实ip地址  
+function get_real_ip(){  
+    static $realip;  
+    if(isset($_SERVER)){  
+        if(isset($_SERVER['HTTP_X_FORWARDED_FOR'])){  
+            $realip=$_SERVER['HTTP_X_FORWARDED_FOR'];  
+        }else if(isset($_SERVER['HTTP_CLIENT_IP'])){  
+            $realip=$_SERVER['HTTP_CLIENT_IP'];  
+        }else{  
+            $realip=$_SERVER['REMOTE_ADDR'];  
+        }  
+    }else{  
+        if(getenv('HTTP_X_FORWARDED_FOR')){  
+            $realip=getenv('HTTP_X_FORWARDED_FOR');  
+        }else if(getenv('HTTP_CLIENT_IP')){  
+            $realip=getenv('HTTP_CLIENT_IP');  
+        }else{  
+            $realip=getenv('REMOTE_ADDR');  
+        }  
+    }  
+    return $realip;  
+}
+```
+
+```
+api接口单位时间内限制访问次数
+<?php
+$redis = new Redis();    
+$redis->connect('127.0.0.1', 6379);   
+//获取客户端真实ip地址  
+function get_real_ip(){  
+    static $realip;  
+    if(isset($_SERVER)){  
+        if(isset($_SERVER['HTTP_X_FORWARDED_FOR'])){  
+            $realip=$_SERVER['HTTP_X_FORWARDED_FOR'];  
+        }else if(isset($_SERVER['HTTP_CLIENT_IP'])){  
+            $realip=$_SERVER['HTTP_CLIENT_IP'];  
+        }else{  
+            $realip=$_SERVER['REMOTE_ADDR'];  
+        }  
+    }else{  
+        if(getenv('HTTP_X_FORWARDED_FOR')){  
+            $realip=getenv('HTTP_X_FORWARDED_FOR');  
+        }else if(getenv('HTTP_CLIENT_IP')){  
+            $realip=getenv('HTTP_CLIENT_IP');  
+        }else{  
+            $realip=getenv('REMOTE_ADDR');  
+        }  
+    }  
+    return $realip;  
+}  
+//这个key记录该ip的访问次数 也可改成用户id   
+$key = get_client_ip();  //该Key记录访问的次数，目前是以IP为例，也可以把用户id作为key，如userid_123456
+  
+//限制次数为3次。  
+$limit = 3;  
+  
+$check = $redis->exists($key);  
+if($check){  
+    $redis->incr($key);  
+    $count = $redis->get($key);  
+    if($count > 3){  
+        exit('已经超出了限制次数');  
+    }  
+}else{  
+    $redis->incr($key);  
+    //限制时间为60秒   
+    $redis->expire($key,60);  
+}  
+  
+$count = $redis->get($key);  
+echo '第 '.$count.' 次请求';
+```
+
+<?php
+ header('Content-Type: text/html;charset=utf-8');
+ header('Access-Control-Allow-Origin:*'); // *代表允许任何网址请求
+ header('Access-Control-Allow-Methods:POST,GET,OPTIONS,DELETE'); // 允许请求的类型
+ header('Access-Control-Allow-Credentials: true'); // 设置是否允许发送 cookies
+ header('Access-Control-Allow-Headers: Content-Type,Content-Length,Accept-Encoding,X-Requested-with, Origin'); // 设置允许自定义请求头的字段
+if($_GET['name']) { 
+　　$name = $_GET['name'];
+　　echo $name;
+} else { 
+　　echo "请求成功但。。。。";
+} ?>﻿
+
+```
+<?php
+/**
+ * 使用线段切割法
+ * 当N个人一起抢总金额为M的红包时，我们需要做N-1次随机运算，以此确定N-1个切割点。随机的范围区间是（1， M）。
+ * $bonusAmount 发放金额
+ * $nop         发放人数
+ * $min         每人最小获得金额
+*/
+function getBonus($bonusAmount = 5000, $nop = 5, $min = 1)
+{
+	$arr = array();
+	for($i=1;$i<$nop;$i++){
+	    // 保证每个人都能抢到红包，使用 （剩余金额 - 剩余人数最低获取金额）/（剩余人数）来控制本次金额取值范围
+		$max = ($bonusAmount - ($nop-$i)*$min)/($nop-$i);
+		$amount = rand(1, $max);
+		$bonusAmount -= $amount;
+		array_push($arr, $amount);
+	}
+	array_push($arr, $bonusAmount);
+	return $arr;
+}
+$res = getBonus();
+var_dump($res);
+// 后续每人领取时从数组中按顺序取出值即可
+```
+
+```
+ //下载文件
+public function download_files($file_path,$filename){
+if(!empty($file_path)){
+$cur_path = trim(',',$file_path);
+$file_type = explode('.',$cur_path);
+$cur_type = $file_type[(count($file_type)-1)];
+//This will set the Content-Type to the appropriate setting for the file
+switch( $cur_type ) {
+case "pdf": $ctype="application/pdf"; break;
+case "exe": $ctype="application/octet-stream"; break;
+case "zip": $ctype="application/zip"; break;
+case "doc": $ctype="application/msword"; break;
+case "docx": $ctype="application/msword"; break;
+case "xls": $ctype="application/vnd.ms-excel"; break;
+case "ppt": $ctype="application/vnd.ms-powerpoint"; break;
+case "gif": $ctype="image/gif"; break;
+case "png": $ctype="image/png"; break;
+case "jpeg":
+case "jpg": $ctype="image/jpg"; break;
+case "mp3": $ctype="audio/mpeg"; break;
+case "wav": $ctype="audio/x-wav"; break;
+case "mpeg":
+case "mpg":
+case "mpe": $ctype="video/mpeg"; break;
+case "mov": $ctype="video/quicktime"; break;
+case "avi": $ctype="video/x-msvideo"; break;
+
+//The following are for extensions that shouldn't be downloaded (sensitive stuff, like php files)
+case "php":
+case "htm":
+case "html":
+case "txt": $ctype="application/txt"; break;
+
+default: $ctype="application/force-download";
+}
+
+if(file_exists($file_path)) {
+header("Content-Type: ".$ctype);
+header("Content-Length:".filesize($file_path));
+header("Content-Disposition: attachment; filename=".$filename);
+readfile($file_path);
+exit;
+}else{
+echo "文件不存在！";
+exit;
+}
+}else{
+echo "文件不存在!";
+exit;
+}
+}
+```
+
+**在php中error_reporting这个函数的作用是什么？常用设置有哪些**
+
+该函数设置当前脚本的错误报告级别。该函数返回旧的错误报告级别。
+
+
+
+## 报告级别
+
+
+
+| 值   | 常量                | 描述                                                         |
+| :--- | :------------------ | :----------------------------------------------------------- |
+| 1    | E_ERROR             | 运行时致命的错误。不能修复的错误。停止执行脚本。             |
+| 2    | E_WARNING           | 运行时非致命的错误。没有停止执行脚本。                       |
+| 4    | E_PARSE             | 编译时的解析错误。解析错误应该只由解析器生成。               |
+| 8    | E_NOTICE            | 运行时的通知。脚本发现可能是一个错误，但也可能在正常运行脚本时发生。 |
+| 16   | E_CORE_ERROR        | PHP 启动时的致命错误。这就如同 PHP 核心的 E_ERROR。          |
+| 32   | E_CORE_WARNING      | PHP 启动时的非致命错误。这就如同 PHP 核心的 E_WARNING。      |
+| 64   | E_COMPILE_ERROR     | 编译时致命的错误。这就如同由 Zend 脚本引擎生成的 E_ERROR。   |
+| 128  | E_COMPILE_WARNING   | 编译时非致命的错误。这就如同由 Zend 脚本引擎生成的 E_WARNING。 |
+| 256  | E_USER_ERROR        | 用户生成的致命错误。这就如同由程序员使用 PHP 函数 trigger_error() 生成的 E_ERROR。 |
+| 512  | E_USER_WARNING      | 用户生成的非致命错误。这就如同由程序员使用 PHP 函数 trigger_error() 生成的 E_WARNING。 |
+| 1024 | E_USER_NOTICE       | 用户生成的通知。这就如同由程序员使用 PHP 函数 trigger_error() 生成的 E_NOTICE。 |
+| 2048 | E_STRICT            | 运行时的通知。PHP 建议您改变代码，以提高代码的互用性和兼容性。 |
+| 4096 | E_RECOVERABLE_ERROR | 可捕获的致命错误。这就如同一个可以由用户定义的句柄捕获的 E_ERROR（见 set_error_handler()）。 |
+| 8191 | E_ALL               | 所有的错误和警告的级别，除了 E_STRICT（自 PHP 6.0 起，E_STRICT 将作为 E_ALL的一部分）。 |
