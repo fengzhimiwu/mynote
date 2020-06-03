@@ -26,36 +26,9 @@
 > “*” 可替代任意多个字符。  
 > 中括号“[charset]”可替代 charset 集中的任何单个字符，如[a-z]，[abABC]
 
-### Git
 
-- Push 代码时发生突破如何处理？
-
-> 1、使用 git stash 将本地文件暂存
-> 
-> 2、更新代码 git pull
-> 
-> 3、还原暂存的内容 git stash pop
-
-- 线上服务器代码出了问题如何回滚？
-
-> git reset --hard HEAD^
-
-- GitFlow 中都有那些分支？
-
-> 两个长期维护分支
-> 
-> - 主分支（master）
-> - 开发分支 （develop）
-> 
-> 三种短期分支
-> 
-> - 功能分支（feature branch）
-> - 补丁分支（hotfix branch）
-> - 预发分支（release branch）
 
 ### 扩展阅读
 
 - [linux面试常问命令](http://blog.csdn.net/u010842515/article/details/72732106)
 - [Linux常见面试题](https://www.leolan.top/index.php/posts/36.html)
-- [Git教程](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000)
-- [Gitflow 工作流](https://laravel-china.org/articles/6318/gitflow-workflow)

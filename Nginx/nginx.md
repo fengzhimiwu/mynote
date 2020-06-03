@@ -305,7 +305,7 @@ server {
 }`
 ```
 #### 运行http://localhost/index.html结果
-![avatar](./images/ok.png)
+![avatar](../images/ok.png)
 
 #### 配置限定的资源文件如果被第三方调用直接返回403
 ```
@@ -339,7 +339,7 @@ server {
 }
 ```
 #### 运行http://localhost/index.html结果
-![avatar](./images/403.png)
+![avatar](../images/403.png)
 
 #### 配置限定的资源文件如果被第三方调用直接返回一张404的图片
 ```
@@ -374,9 +374,9 @@ server {
 ```
 #### 运行http://localhost/index.html结果
 调用的图片显示302
-![avatar](./images/302.png)
+![avatar](../images/302.png)
 用一张源站的404替换显示
-![avatar](./images/404.png)
+![avatar](../images/404.png)
 
 ## nginx反向代理
 跨域：浏览器从一个域名的网页去请求另一个域名的资源时，域名、端口、协议任一不同，都是跨域 。
@@ -431,7 +431,7 @@ proxy_pass  url地址
 ## nginx实现负载均衡
 负载均衡：针对web负载均衡简单的说就是将请求通过负债均衡软件或者负载均衡器将流量分摊到其它服务器。
 负载均衡的分类如下图：
-![avatar](./images/nginx-fz.png)
+![avatar](../images/nginx-fz.png)
 
 今天分享一下nginx实现负载均衡的实现，操作很简单就是利用了nginx的反向代理和upstream实现：
 
@@ -618,11 +618,11 @@ server{
 ```
 
 为使用gzip前的页面请求：
-![avatar](./images/nginx_gzip1.png)
+![avatar](../images/nginx_gzip1.png)
 
 开启了gzip页面的请求：
-![avatar](./images/nginx_gzip2.png)
-![avatar](./images/nginx_gzip2.2.png)
+![avatar](../images/nginx_gzip2.png)
+![avatar](../images/nginx_gzip2.2.png)
 
 #### 注意
 - 图片，mp3一般不需要压缩，因为压缩率比较小

@@ -219,3 +219,35 @@ git push -u origin master
 ```
 
 注意：第10、11条示例中 `git@github.com:ycrao/example.git` 或 `git@github.com:ycrao/existing_git_repo.git` 是仓库 `SSH` 方式地址，一般源码托管服务商（如 `GitHub` 和 `Coding` ）会在仓库页面中告知你，请根据实际情况与操作自行替换。
+
+### Git
+
+- Push 代码时发生突破如何处理？
+
+> 1、使用 git stash 将本地文件暂存
+>
+> 2、更新代码 git pull
+>
+> 3、还原暂存的内容 git stash pop
+
+- 线上服务器代码出了问题如何回滚？
+
+> git reset --hard HEAD^
+
+- GitFlow 中都有那些分支？
+
+> 两个长期维护分支
+>
+> - 主分支（master）
+> - 开发分支 （develop）
+>
+> 三种短期分支
+>
+> - 功能分支（feature branch）
+> - 补丁分支（hotfix branch）
+> - 预发分支（release branch）
+
+
+
+- [Git教程](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000)
+- [Gitflow 工作流](https://laravel-china.org/articles/6318/gitflow-workflow)
