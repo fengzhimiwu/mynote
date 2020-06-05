@@ -656,4 +656,38 @@ b: `grep "07/May/2018:10:" /usr/local/var/log/nginx/access.log|awk '{print $12}'
 
 
 
+laravel 重写
+
+```
+if (!-d $request_filename)
+		{
+			rewrite ^/(.+)/$ /$1 permanent;
+		}
+
+		# 去除index action
+		if ($request_uri ~* index/?$)
+		{
+			rewrite ^/(.*)/index/?$ /$1 permanent;
+		}
+
+		# 根据laravel规则进行url重写
+		if (!-e $request_filename)
+		{
+		  rewrite ^/(.*)$ /index.php?/$1 last;
+		  break;
+		}
+```
+
+#### nginx开启rewrite
+
+```
+		#autoindex on;
+  		if (!-e $request_filename) {
+    		rewrite ^(.*)$ /index.php?s=/$1 last;
+   		 break;
+  			}
+
+```
+
+
 
