@@ -1,41 +1,116 @@
-####redis 命令列表
+#### redis 命令列表
 
-del 删除给定的一个或多个 key 。不存在的 key 会被忽略。返回被删除key的数量。O(N)， N 为被删除的 key 的数量。删除单个字符串类型的 key ，时间复杂度为O(1)。删除单个列表、集合、有序集合或哈希表类型的 key ，时间复杂度为O(M)， M 为以上数据结构内的元素数量。
-dump 。序列化给定 key ，并返回被序列化的值，使用 RESTORE 命令可以将这个值反序列化为 Redis 键
-exists 检查给定 key 是否存在。若 key 存在，返回 1 ，否则返回 0 。
-expire key seconds 设置过期时间。设置成功返回 1
-expireat key timestamp 设置过期时间，后面跟的是unix 时间戳
-KEYS pattern 查找所有符合给定模式 pattern 的 key。
-ttl -2表示不存在key -1 表示永不过期
-KEYS * 匹配数据库中所有 key 。
-KEYS h?llo 匹配 hello ， hallo 和 hxllo 等。
-KEYS h*llo 匹配 hllo 和 heeeeello 等。
-KEYS h[ae]llo 匹配 hello 和 hallo ，但不匹配 hillo 。
-KEYS 的速度非常快，但在一个大的数据库中使用它仍然可能造成性能问题，如果你需要从一个数据集中查找特定的 key ，你最好还是用 Redis 的集合结构(set)来代替。
-migrate host port key destination-db timeout [COPY] [REPLACE] 迁移实例key
-MOVE key db 将当前数据库的 key 移动到给定的数据库 db 当中
-object subcommand [arguments [arguments]] OBJECT 命令允许从内部察看给定 key 的 Redis 对象
-OBJECT 命令有多个子命令：
+**del**
 
-OBJECT REFCOUNT <key> 返回给定 key 引用所储存的值的次数。此命令主要用于除错。
-OBJECT ENCODING <key> 返回给定 key 锁储存的值所使用的内部表示(representation)。
-OBJECT idletime <key> 返回给定 key 自储存以来的空转时间(idle， 没有被读取也没有被写入)，以秒为单位。
-persist key 移除key的时间，转换为永久key
-pexpire p-expire跟expire类似，存储毫秒
-pexpireat 毫秒的时间戳
-pttl 返回毫秒生存时间
-randomkey 随机返回一个key
-rename key newkey 修改key名字
-renamenx key newkey 当且仅当 newkey 不存在时，将 key 改名为 newkey
-restore key ttl serialized-value 反序列化给定的序列化值，并将它和给定的 key 关联。个人理解可以将反序列化的值赋值给一个新key
-sort key [BY pattern] [LIMIT offset count] [GET pattern [GET pattern ...]] [ASC | DESC] [ALPHA] [STORE destination] 返回或保存给定列表、集合、有序集合 key 中经过排序的元素
-type key 返回 key 所储存的值的类型
+>删除给定的一个或多个 key 。不存在的 key 会被忽略。返回被删除key的数量。O(N)， N 为被删除的 key 的数量。删除单个字符串类型的 key ，时间复杂度为O(1)。删除单个列表、集合、有序集合或哈希表类型的 key ，时间复杂度为O(M)， M 为以上数据结构内的元素数量。
+
+**dump**
+> 序列化给定 key ，并返回被序列化的值，使用 RESTORE 命令可以将这个值反序列化为 Redis 键
+
+**exists**
+
+> 检查给定 key 是否存在。若 key 存在，返回 1 ，否则返回 0 。
+
+**expire key seconds** 
+
+> 设置过期时间。设置成功返回 1
+
+**expireat key timestamp**
+
+> 设置过期时间，后面跟的是unix 时间戳
+
+**KEYS pattern**
+
+> 查找所有符合给定模式 pattern 的 key。
+
+**TTL KEY_NAME**
+
+> 返回 -2表示不存在 ， -1 表示永不过期， 否则，以秒为单位，返回 key 的剩余生存时间。
+> **注意：**在 Redis 2.8 以前，当 key 不存在，或者 key 没有设置剩余生存时间时，命令都返回 -1 。
+
+**KEYS**
+
+> 匹配数据库中所有 key 。
+
+**KEYS h?llo**
+
+> 匹配 hello ， hallo 和 hxllo 等。
+
+**KEYS h*llo**
+
+> 匹配 hllo 和 heeeeello 等。
+
+**KEYS h[ae]llo** 
+
+> 匹配 hello 和 hallo ，但不匹配 hillo 。
+
+**KEYS**
+
+> 速度非常快，但在一个大的数据库中使用它仍然可能造成性能问题，如果你需要从一个数据集中查找特定的 key ，你最好还是用 Redis 的集合结构(set)来代替。
+
+**migrate host port key destination-db timeout [COPY] [REPLACE]**
+
+> 迁移实例key
+
+**MOVE key db**
+
+> 将当前数据库的 key 移动到给定的数据库 db 当中
+
+**object subcommand [arguments [arguments]] OBJECT**
+
+> 命令允许从内部察看给定 key 的 Redis 对象
+> OBJECT 命令有多个子命令：
+> OBJECT REFCOUNT <key> 返回给定 key 引用所储存的值的次数。此命令主要用于除错。
+> OBJECT ENCODING <key> 返回给定 key 锁储存的值所使用的内部表示(representation)。
+> OBJECT idletime <key> 返回给定 key 自储存以来的空转时间(idle， 没有被读取也没有被写入)，以秒为单位。
+
+**persist key**
+
+> 移除key的时间，转换为永久key
+
+**pexpire p-expire**
+
+> 跟expire类似，存储毫秒
+
+**pexpireat**
+
+> 毫秒的时间戳
+
+**pttl**
+
+> 返回毫秒生存时间
+
+**randomkey**
+
+> 随机返回一个key
+
+**rename key newkey**
+
+> 修改key名字
+
+**renamenx key newkey**
+
+> 当且仅当 newkey 不存在时，将 key 改名为 newkey
+
+**restore key ttl serialized-value**
+
+> 反序列化给定的序列化值，并将它和给定的 key 关联。个人理解可以将反序列化的值赋值给一个新key
+
+**sort key [BY pattern] [LIMIT offset count] [GET pattern [GET pattern ...]] [ASC | DESC] [ALPHA] [STORE destination]**
+
+> 返回或保存给定列表、集合、有序集合 key 中经过排序的元素
+
+**type key**
+
+> 返回 key 所储存的值的类型
+
 scan cursor [MATCH pattern] [COUNT count]
 SCAN 命令用于迭代当前数据库中的数据库键。
 SSCAN 命令用于迭代集合键中的元素。
 HSCAN 命令用于迭代哈希键中的键值对。
 ZSCAN 命令用于迭代有序集合中的元素（包括元素成员和元素分值）。
-redis 字符串
+
+### redis 字符串
 
 APPEND key value
 如果 key 已经存在并且是一个字符串， APPEND 命令将 value 追加到 key 原来的值的末尾。
@@ -54,7 +129,7 @@ Bitmap 对于一些特定类型的计算非常有效。
 bitop operation destkey key [key ...] 对一个或多个保存二进制位的字符串 key 进行位元操作，并将结果保存到 destkey 上。
 decr key 数字减1
 decrby key decrement 将 key 所储存的值减去减量 decrement 如果 key 不存在，那么 key 的值会先被初始化为 0 ，然后再执行 DECRBY 操作
-get key 返回 key 所关联的字符串值
+**get key** 返回 key 所关联的字符串值
 getbit key offset 对 key 所储存的字符串值，获取指定偏移量上的位(bit)。
 getrange key start end 字符串截取，2.0之前版本叫做substr
 getset key value 将给定 key 的值设为 value ，并返回 key 的旧值(old value)。
@@ -69,7 +144,8 @@ setbit key offset value 对 key 所储存的字符串值，设置或清除指定
 SETEX key seconds value 将值 value 关联到 key ，并将 key 的生存时间设为 seconds (以秒为单位)。
 SETNX key value 将 key 的值设为 value ，当且仅当 key 不存在。
 setrange key offset value 用 value 参数覆写(overwrite)给定 key 所储存的字符串值，从偏移量 offset 开始
-hash表
+
+### hash表
 
 hdel key field [field ...] 删除哈希表 key 中的一个或多个指定域，不存在的域将被忽略。
 在Redis2.4以下的版本里， HDEL 每次只能删除单个域，如果你需要在一个原子时间内删除多个域，请将命令包含在 MULTI / EXEC 块内。
@@ -86,7 +162,8 @@ hset key field value 将哈希表 key 中的域 field 的值设为 value 。
 hsetnx key field value 将哈希表 key 中的域 field 的值设置为 value ，当且仅当域 field 不存在。
 hvals key 返回哈希表 key 中所有域的值
 hscan
-list liebiao
+
+### list 列表
 
 blpop|brpop key [key ...] timeout 它是 LPOP 命令的阻塞版本，当给定列表内没有任何元素可供弹出的时候，连接将被 BLPOP 命令阻塞，直到等待超时或发现可弹出元素为止。timeout=0,一直堵塞。他会轮询你当前的key，当所有的为nil时再堵塞。b是blocking的意思
 brpoplpush | rpoplpush source destination timeout 将列表source最右边元素弹出放到destination列表的最左边。b有堵塞功能，如果source和destination相同，则列表中的表尾元素被移动到表头，并返回该元素，称为列表的旋转
@@ -106,7 +183,8 @@ count < 0 : 从表尾开始向表头搜索，移除与 value 相等的元素，�
 count = 0 : 移除表中所有与 value 相等的值。
 lset key index value 将列表 key 下标为 index 的元素的值设置为 value 。
 ltrim key start stop 对一个列表进行修剪(trim)，就是说，让列表只保留指定区间内的元素，不在指定区间之内的元素都将被删除。
-set集合
+
+### set集合
 
 sadd key member [member ...] 将一个或多个 member 元素加入到集合 key 当中，已经存在于集合的 member 元素将被忽略。
 scard key 返回集合中的基数
@@ -124,7 +202,8 @@ srem key member [member ...] 移除集合 key 中的一个或多个 member 元�
 sunion key [key ...] 返回一个集合的全部成员，该集合是所有给定集合的并集。自动去重的
 sunionstore destination key [key ...] 集合存储
 scan
-有序集合
+
+### 有序集合
 
 zadd key score member [[score member] [score member] ...] 将一个或多个 member 元素及其 score 值加入到有序集 key 当中。
 zcard key 返回有序集 key 的基数。
