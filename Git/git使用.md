@@ -121,3 +121,15 @@ git remote rm origin
 
 git remote add origin git@gitee.com:liaoxuefeng/learngit.git
 
+
+
+#### Git 中 warning: LF will be replaced by CRLF in readme.txt.问题解决
+
+意思是：
+警告:LF将被readme.txt中的CRLF替换。该文件将在工作目录中以其原始行结尾。
+出现此问题是因为不同操作系统的使用的换行符不同：
+Linux / Unix 采用换行符LF表示下一行
+Windows  采用回车+换行 CRLF表示下一行
+解决：可以通过设置 core.autocrlf 的值解决
+$ git config --global core.autocrlf false    # 关闭自动转换 
+
