@@ -39,7 +39,7 @@ du -s /* | sort -nr 命令查看那个目录占用空间大
 
 即：各权限的对应数字为：r:4，w:2，x:1
 
-####MIME是什么，列举一些常见的类型 mime类型是多用途互联网邮件扩展类型
+####MIME(Multipurpose Internet Mail Extensions)，一些常见的类型 mime类型是多用途互联网邮件扩展类型
 
 常见的MIME类型(通用型)：
 
