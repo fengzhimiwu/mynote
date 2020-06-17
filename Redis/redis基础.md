@@ -359,7 +359,9 @@ RDB 的缺点是：如果你需要尽量避免在服务器故障时丢失数据�
 
 使用 AOF 做持久化，每一个写命令都通过 write 函数追加到 appendonly.aof 中，配置方式如下：
 
-appendfsyncyesappendfsync always #每次有数据修改发生时都会写入AOF文件。appendfsync everysec #每秒钟同步一次，该策略为AOF的缺省策略。
+appendfsyncyesappendfsync always #每次有数据修改发生时都会写入AOF文件。
+
+appendfsync everysec #每秒钟同步一次，该策略为AOF的缺省策略。
 
 AOF 可以做到全程持久化，只需要在配置中开启 appendonly yes。这样 Redis 每执行一个修改数据的命令，都会把它添加到 AOF 文件中，当 Redis 重启时，将会读取 AOF 文件进行重放，恢复到 Redis 关闭前的最后时刻。
 

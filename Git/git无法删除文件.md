@@ -16,10 +16,20 @@
 
 ### 问题解决：
 
-git的clean command：***git-clean - Remove untracked files from the working tree***
+git的clean command：**git-clean - Remove untracked files from the working tree**
 
-***git clean –fd untracked folder\***
+**git clean –fd untracked folder**
 
 或者进入目录，delete
 
 也可指定文件进行删除
+
+
+
+## Git 过滤已上传的文件夹
+
+1、删除所有文件追踪状态
+
+git rm -r --cached xxx
+
+2、新增.gitignore文件，并将要忽略的目录写入文件

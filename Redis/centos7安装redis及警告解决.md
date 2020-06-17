@@ -65,7 +65,7 @@
 
   参考：[有关linux下redis overcommit_memory的问题](http://blog.csdn.net/whycold/article/details/21388455)
 
-**第三次警告：**
+**第三个警告：**
 
   意思是：你使用的是透明大页，可能导致redis延迟和内存使用问题。执行 echo never >   /sys/kernel/mm/transparent_hugepage/enabled 修复该问题。
 

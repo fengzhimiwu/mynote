@@ -78,8 +78,6 @@ ASCII、Unicode、GBK、UTF-8 ascii英文编码，gbk是中文编码，unicode�
 
 
 
-[Linux网络编程之select、poll、epoll的比较，以及epoll的水平触发(LT)和边缘触发(ET)](https://www.cnblogs.com/heluan/p/9589086.html)
-
 [I/O多路复用技术（multiplexing）是什么？](https://www.zhihu.com/question/28594409)
 
 Linux的网络通信先后推出了select、poll、epoll三种模式。
