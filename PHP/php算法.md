@@ -635,6 +635,33 @@ for($i=1;$i<$count;$i++){
 echo "数组中最小值的索引为:".$min.',最小值为:'.$arr[$min];
 ```
 
+### 约瑟夫环问题
+
+```php
+// 方法一
+function test1($arr, $n)
+{
+    $i = 1;
+    while(1) {
+        if (count($arr) == 1) return $arr[$i - 1];
+        if ($i % $n != 0) {
+            array_push($arr, $arr[$i - 1]);
+        }
+        unset($arr[$i - 1]);
+        $i++;
+    }
+}
+$arr = [1,2,3,4,5];
+var_dump(test1($arr, 3));
+
+// 方法二
+
+```
+
+
+
+
+
 ### 扩展阅读
 
 - [PHP 冒泡排序](https://www.cnblogs.com/wgq123/p/6529450.html)
