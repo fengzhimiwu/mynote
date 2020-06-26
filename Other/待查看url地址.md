@@ -10,6 +10,14 @@ https://www.jishuchi.com/read/sorting-algorithm/1093
 
 
 
+主讲存储结构：https://blog.csdn.net/qq_41618510/article/details/84702890
+
+主讲数据存储：https://blog.csdn.net/qq_41618510/article/details/84702890
+
+主讲存储引擎：https://blog.csdn.net/qq_41618510/article/details/84680226
+
+分布式 、高并发、集群、负载均衡、高可用 https://blog.csdn.net/java_wxid/article/details/88706121
+
 设计模式
 
 - [研磨设计模式(电子版高清带书签)](http://https//u632278.ctfile.com/fs/632278-376170149) ： https://u632278.ctfile.com/fs/632278-376170149
