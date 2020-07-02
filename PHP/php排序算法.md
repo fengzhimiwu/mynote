@@ -73,7 +73,7 @@
 
 #### 1.3 代码实现
 
-```javascript
+```
 // javaScript实现
 function bubbleSort(arr) {
     var len = arr.length;
@@ -87,6 +87,19 @@ function bubbleSort(arr) {
         }
     }
     return arr;
+}
+
+// php
+$arr = [33,1,4,2,19,15,20,5];
+$len = count($arr);
+for ($i = 1; $i < $len; $i++) {
+    for ($j = 0; $j < $len - $i; $j++) {
+        if ($arr[$j] > $arr[$j+1]) {
+            $tmp = $arr[$j];
+            $arr[$j] = $arr[$j+1];
+            $arr[$j+1] = $tmp;
+        }
+    }
 }
 ```
 
@@ -108,7 +121,7 @@ n个记录的直接选择排序可经过n-1趟直接选择排序得到有序结�
 
 #### 2.3 代码实现
 
-```javascript
+```
 // JavaScript实现
 function selectionSort(arr) {
     var len = arr.length;
@@ -126,6 +139,22 @@ function selectionSort(arr) {
     }
     return arr;
 } 
+
+// php
+$len = count($arr);
+for ($i = 0; $i < $len - 1; $i++) {
+    $minIndex = $i;
+    for ($j = $i + 1; $j < $len; $j++) {
+        if ($arr[$j] < $arr[$minIndex]) {
+            $minIndex = $j;
+        }
+    }
+    if ($minIndex != $i) {
+        $tmp = $arr[$i];
+        $arr[$i] = $arr[$minIndex];
+        $arr[$minIndex] = $tmp;
+    }
+}
 ```
 
 #### 2.4 算法分析
@@ -155,7 +184,7 @@ function selectionSort(arr) {
 
 #### 3.2 代码实现
 
-```javascript
+```
 // javaScript实现
 function insertionSort(arr) {
     var len = arr.length;
@@ -170,6 +199,18 @@ function insertionSort(arr) {
         arr[preIndex + 1] = current;
     }
     return arr;
+}
+
+// php
+$len = count($arr);
+for ($i = 1; $i < $len; $i++) {
+    $preIndex = $i - 1;
+    $current = $arr[$i];
+    while ($preIndex >= 0 && $arr[$preIndex] > $current) {
+        $arr[$preIndex+1] = $arr[$preIndex];
+        $preIndex--;
+    }
+    $arr[$preIndex+1] = $current;
 }
 ```
 
