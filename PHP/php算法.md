@@ -658,6 +658,38 @@ var_dump(test1($arr, 3));
 
 ```
 
+### 斐波那契数列
+
+```php
+//方法一  使用原始方法
+function fibo(i)
+{
+    if(i == 0){
+        return 1;
+    }else if(i == 1){
+        return 1;
+    }else{
+        total = fibo(i-1) + fibo(i-2);
+        return total;
+    }
+}
+//方法二 使用迭代解法, 将每一次执行的数据保存起来,时间会大大缩短
+function  fibo1(i)
+{
+    if(i<=1){
+        return 1;
+    }
+    var pre = 1;
+    var prepre = 1;
+    for(j = 2; j <= i; j++){
+        total = pre + prepre;
+        prepre = pre;
+        pre = total;
+    }
+    return total;
+}
+```
+
 
 
 
