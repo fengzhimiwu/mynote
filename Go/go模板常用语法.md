@@ -207,3 +207,11 @@ v来访问遍历的值，还有一种遍历方式为：
 就可以将当前的变量传给子模板了，这个也是相当方便的。
 
 原文链接：https://blog.csdn.net/tianlongtc/article/details/80073098
+
+
+
+相关文章：
+
+https://studygolang.com/articles/21435?fr=sidebar
+
+https://studygolang.com/articles/3071
