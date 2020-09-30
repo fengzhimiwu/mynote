@@ -208,6 +208,7 @@ server.Serve()
 Thrift 框架示意图
 
 ### gRPC 和 Thrift 的区别和选择
+
 Thrift 是 RPC 领域的老牌开源项目，而 gRPC 后来者居上，逐渐超越了 Thrift，二者目前在社区欢迎度和使用度上的对比可以通过 StackShare 网站查看，截至 2020 年 7 月的数据如下图所示：
 
 ![](../../../images/go/microservice/service-51.jpg)
