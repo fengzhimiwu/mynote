@@ -116,3 +116,45 @@ du          //文件占用信息
 ps              //查看进程信息
 netstat -anptol //查看端口占用情况,参数细节建议查文档,小心被问倒
 ```
+
+
+
+### centos新增用户使用密钥对登录
+
+> 新增一个用户组Guest
+> groupadd Guest
+> 在用户组Guest中创建一个用户guest并指定用户的目录为/home/guest/guest01
+> mkdir -p /home/guest
+> useradd guest01 -g Guest  -d /home/guest/guest01
+> 切换到guest用户并进入用户目录
+> su guest01
+> cd ~/
+> 使用命令创建密钥对文件，一路回车，无需输入
+> ssh-keygen -t rsa
+> 将公钥文件重命名为authorized_keys
+> mv id_rsa.pub authorized_keys
+> 便于区分，也将私钥文件重命名
+> mv id_rsa id_rsa_guest01.pem
+> 将目录.ssh权限设置为700，公钥文件authorized_keys设置为644
+> chmod 700 ../.ssh/
+> chmod 644 authorized_keys
+> 由于此时guest的私钥文件还在服务器，远程还不能登录，因此切换回root用户将私钥文件下载到远程本地
+
+### Windows下生成SSH密钥
+
+在Windows下查看**[c盘->用户->自己的用户名->.ssh]**下是否有*"id_rsa、id_rsa.pub"*文件
+
+创建SSH Key
+
+打开**Git Bash**，在控制台中输入以下命令:
+
+```
+$ ssh-keygen -t rsa -C "youremail@example.com"
+```
+
+密钥类型可以用 -t 选项指定。如果没有指定则默认生成用于SSH-2的RSA密钥。这里使用的是rsa。
+ 同时在密钥中有一个注释字段，用-C来指定所指定的注释，可以方便用户标识这个密钥，指出密钥的用途或其他有用的信息。所以在这里输入自己的邮箱或者其他都行,当然，如果不想要这些可以直接输入：
+
+```
+$ ssh-keygen
+```
