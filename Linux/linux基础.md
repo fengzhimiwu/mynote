@@ -140,6 +140,61 @@ netstat -anptol //查看端口占用情况,参数细节建议查文档,小心被
 > chmod 644 authorized_keys
 > 由于此时guest的私钥文件还在服务器，远程还不能登录，因此切换回root用户将私钥文件下载到远程本地
 
+### CentOS配置指定用户密钥
+
+原理：
+
+> 使用SSH-keygen创建密钥之后，会生成两个文件，公钥文件和私钥文件形成密码对，在SSH服务端保留公钥。个人用户保留私钥。登录时候拿自己的私钥，到**用户home路径.ssh文件夹**下去匹配是否通过。
+
+公钥保留在文件`authorized_keys`中，文件名可以在SSH服务配置项中配置。
+
+配置指定用户的登录密钥步骤如下：
+
+1. 创建密钥对(root用户)
+
+```shell
+ssh-keygen -t rsa -b 2048
+# 加密算法：rsa
+# 密码长度：2048
+```
+
+1. 保留公钥
+
+```shell
+mkdir /home/user/.ssh
+touch /home/user/.ssh/authorized_keys
+cat id_rsa.pub >> /home/user/.ssh/authorized_keys  # 注使用'>>' ，防止覆盖已有公钥信息
+```
+
+1. 修改权限(关键一步，没有权限，无法登录成功)
+
+```shell
+chown user:group /home/user/.ssh
+chmod 700 /home/user/.ssh
+chmod 600 /home/user/.ssh/authorized_keys
+```
+
+1. 下载私钥：`id_rsa`文件
+2. 远程登录：
+
+```shell
+ssh -i id_rsa user@ip
+```
+
+修改SSH服务配置信息
+
+```shell
+#开始编辑
+sudo vi /etc/ssh/sshd_config
+#改动以下参数
+Port 22        #开放的端口，修改22默认端口
+# PermitRootLogin no        #禁止root登陆，一般不设置
+PasswordAuthentication no         #禁止密码登陆
+
+#保存后重启sshd
+sudo service sshd restart
+```
+
 ### Windows下生成SSH密钥
 
 在Windows下查看**[c盘->用户->自己的用户名->.ssh]**下是否有*"id_rsa、id_rsa.pub"*文件
